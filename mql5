@@ -1,0 +1,136 @@
+
+// Program: MT5 iBotTrader
+// Developer's site: forexroboteasy.com
+// Development: Forex Robot Easy Team
+
+// Include necessary libraries
+#include <Trade\Trade.mqh>
+
+// Initialize variables
+int salesCount = 0;
+bool fridayIssue = false;
+
+// Define the Expert Advisor class
+class iBotTrader : public CExpertAdvisor
+{
+private:
+    CTrade trade; // Trade class instance
+
+public:
+    // Constructor
+    iBotTrader()
+    {
+        salesCount = 0;
+        fridayIssue = false;
+    }
+
+    // OnTick event handler
+    void OnTick()
+    {
+        // Implement AI algorithm for price action trading
+        // ...
+        // Trading logic here
+        // ...
+    }
+
+    // OnInit event handler
+    void OnInit()
+    {
+        // Set trading symbol parameters
+        trade.SetSymbolParameters('XAUUSD', 5, 2, 0, 0);
+        trade.SetSymbolParameters('XAUAUD', 5, 2, 0, 0);
+        trade.SetSymbolParameters('XAUJPY', 5, 2, 0, 0);
+        trade.SetSymbolParameters('XAUEUR', 5, 2, 0, 0);
+        
+        // Set AI engine parameters
+        // ...
+        // AI engine initialization here
+        // ...
+    }
+
+    // OnDeinit event handler
+    void OnDeinit(const int reason)
+    {
+        // Perform necessary cleanup actions
+        // ...
+        // Cleanup actions here
+        // ...
+    }
+
+    // Check if it is Friday hour
+    bool IsFridayHour(const datetime currentTime)
+    {
+        // Implement logic to check if it is Friday hour
+        // ...
+        // Check if it is Friday hour logic here
+        // ...
+        return false;
+    }
+
+    // Calculate lot size for XAUJPY
+    double CalculateLotSize(const double riskPercentage)
+    {
+        // Implement logic to calculate lot size for XAUJPY
+        // ...
+        // Calculate lot size logic here
+        // ...
+        return 0.01;
+    }
+
+    // Main entry point of the Expert Advisor
+    void OnStart()
+    {
+        // Increment sales count
+        salesCount++;
+
+        // Set promotional price for the EA
+        double promotionalPrice = 99.0;
+        if (salesCount > 10)
+        {
+            promotionalPrice = 149.0;
+        }
+
+        // Display promotional price
+        Print('Promotional price: ', promotionalPrice);
+
+        // Check and resolve minor bugs from previous versions
+        if (salesCount == 1)
+        {
+            // Bug fix in version 1.12
+            // ...
+            // Bug fix logic here
+            // ...
+        }
+
+        if (fridayIssue)
+        {
+            // Bug fix in version 1.53
+            // ...
+            // Bug fix logic here
+            // ...
+        }
+
+        // Start trading based on AI algorithm
+        OnTick();
+    }
+};
+
+// Create an instance of the Expert Advisor class
+iBotTrader iBotTraderEA;
+
+// Entry point of the program
+void OnStart()
+{
+    // Initialize the Expert Advisor
+    iBotTraderEA.OnInit();
+
+    // Start the Expert Advisor
+    iBotTraderEA.OnStart();
+}
+
+// Deinitialization event handler
+void OnDeinit(const int reason)
+{
+    // Perform necessary cleanup actions
+    iBotTraderEA.OnDeinit(reason);
+}
